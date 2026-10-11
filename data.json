@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T21:45:18+09:00",
+  "updated_at": "2026-10-11T21:46:54+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -7,15 +7,6 @@
   "players": [
     {
       "position": 1,
-      "name": "윤즈",
-      "elo": 1516,
-      "wins": 1,
-      "losses": 0,
-      "win_rate": 100.0,
-      "rank": "C"
-    },
-    {
-      "position": 2,
       "name": "뿡뿡이",
       "elo": 1501,
       "wins": 1,
@@ -24,16 +15,36 @@
       "rank": "C"
     },
     {
-      "position": 3,
+      "position": 2,
       "name": "베타메일",
-      "elo": 1483,
-      "wins": 0,
+      "elo": 1501,
+      "wins": 1,
       "losses": 1,
-      "win_rate": 0.0,
+      "win_rate": 50.0,
+      "rank": "C"
+    },
+    {
+      "position": 3,
+      "name": "윤즈",
+      "elo": 1498,
+      "wins": 1,
+      "losses": 1,
+      "win_rate": 50.0,
       "rank": "D"
     }
   ],
   "matches": [
+    {
+      "id": 2,
+      "winner": "베타메일",
+      "loser": "윤즈",
+      "winner_elo_before": 1483,
+      "winner_elo_after": 1501,
+      "loser_elo_before": 1516,
+      "loser_elo_after": 1498,
+      "elo_change": 18,
+      "played_at": "2026-10-11 12:46:54"
+    },
     {
       "id": 1,
       "winner": "뿡뿡이",
@@ -53,18 +64,10 @@
       "started_at": "2026-10-11 12:45:14",
       "ended_at": null,
       "is_active": true,
-      "match_count": 1,
+      "match_count": 2,
       "players": [
         {
           "position": 1,
-          "name": "윤즈",
-          "elo": 1516,
-          "wins": 1,
-          "losses": 0,
-          "rank": "C"
-        },
-        {
-          "position": 2,
           "name": "뿡뿡이",
           "elo": 1501,
           "wins": 1,
@@ -72,10 +75,18 @@
           "rank": "C"
         },
         {
-          "position": 3,
+          "position": 2,
           "name": "베타메일",
-          "elo": 1483,
-          "wins": 0,
+          "elo": 1501,
+          "wins": 1,
+          "losses": 1,
+          "rank": "C"
+        },
+        {
+          "position": 3,
+          "name": "윤즈",
+          "elo": 1498,
+          "wins": 1,
           "losses": 1,
           "rank": "D"
         }
