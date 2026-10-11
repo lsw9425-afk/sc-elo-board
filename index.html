@@ -8,7 +8,7 @@
   <style>
     :root{color-scheme:dark;--bg:#080d18;--panel:#111a2a;--panel2:#0c1422;--line:#25334a;--text:#edf3ff;--muted:#91a2bd;--gold:#f6c75b;--blue:#7cbcff;--green:#7ee0b1;--red:#ffaaa8}
     *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#1a3458 0,transparent 48%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-    button,input{font:inherit}.wrap{max-width:1120px;margin:auto;padding:26px 18px 56px}.hero{padding:24px 0 12px}.eyebrow{color:var(--blue);font-weight:850;letter-spacing:.18em;font-size:.74rem}
+    button,input,select{font:inherit}.wrap{max-width:1120px;margin:auto;padding:26px 18px 56px}.hero{padding:24px 0 12px}.eyebrow{color:var(--blue);font-weight:850;letter-spacing:.18em;font-size:.74rem}
     h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1;margin:12px 0;letter-spacing:-.045em}.sub{color:var(--muted);margin:0;line-height:1.6}.live{display:inline-flex;align-items:center;gap:8px;border:1px solid #2a7059;background:#0e2b27;color:#a5f3d0;padding:6px 10px;border-radius:999px;font-size:.76rem;font-weight:800;margin-top:16px}.dot{width:7px;height:7px;border-radius:50%;background:#62e6a6;box-shadow:0 0 12px #62e6a6}
     .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}.stat,.panel{background:linear-gradient(145deg,rgba(19,30,49,.97),rgba(12,20,34,.98));border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 36px #00000016}.stat{padding:17px}.stat span{display:block;color:var(--muted);font-size:.82rem}.stat strong{display:block;font-size:clamp(1.25rem,3vw,1.7rem);margin-top:7px;letter-spacing:-.03em}
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 14px}.tab{border:1px solid var(--line);background:#111a2a;color:var(--muted);padding:10px 15px;border-radius:999px;cursor:pointer;transition:.18s}.tab:hover{border-color:#59708f;color:var(--text)}.tab.active{background:var(--gold);color:#211a09;border-color:var(--gold);font-weight:850}
@@ -16,7 +16,7 @@
     .podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0 22px}.podium-card{position:relative;text-align:center;padding:18px 12px 16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(160deg,#1b2940,#101827);min-width:0}.podium-card.first{border-color:#a98232;background:linear-gradient(160deg,#493a1e,#171b25)}.medal{font-size:1.7rem}.podium-name{display:block;font-size:1.05rem;font-weight:900;margin:8px 0 4px;overflow-wrap:anywhere}.podium-elo{font-size:1.25rem;font-weight:900;color:var(--gold)}.podium-sub{color:var(--muted);font-size:.78rem;margin-top:5px}
     .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;min-width:560px}th,td{text-align:left;padding:12px 11px;border-bottom:1px solid var(--line);white-space:nowrap}th{font-size:.75rem;color:var(--muted);font-weight:800;background:#0d1523}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#ffffff06}.rankno{color:var(--gold);font-weight:900}.elo{font-weight:900}.badge{display:inline-block;border:1px solid #465671;border-radius:7px;padding:3px 7px;font-size:.75rem;font-weight:900}.S{color:#ffb7d4}.A{color:#ff9e75}.B{color:#f5c451}.C{color:#80c8ff}.D{color:#b4c0d4}.E{color:#9aa4b4}
     .player-link{background:none;border:0;padding:0;color:var(--text);font-weight:850;cursor:pointer;text-align:left}.player-link:hover{color:var(--blue);text-decoration:underline}.matches{display:grid;gap:10px}.match{padding:15px;border:1px solid var(--line);border-radius:13px;background:#0d1625}.match-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.winner{color:var(--green);font-weight:900}.loser{color:var(--red);font-weight:900}.result{color:var(--muted);font-size:.82rem;margin-top:9px;line-height:1.7}
-    input{width:100%;background:#09111e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:0 0 13px;outline:none}input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #7cbcff1c}.season-list{display:grid;gap:10px}.season{padding:15px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:#0d1625;transition:.18s}.season:hover,.season.selected{border-color:var(--blue);background:#122137}.season strong{display:block;margin-bottom:5px}.season small{color:var(--muted);line-height:1.5}.season-champ{color:var(--gold);font-weight:850;margin-top:8px;font-size:.88rem}
+    input,select{width:100%;background:#09111e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:0 0 13px;outline:none}input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #7cbcff1c}.season-list{display:grid;gap:10px}.season{padding:15px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:#0d1625;transition:.18s}.season:hover,.season.selected{border-color:var(--blue);background:#122137}.season strong{display:block;margin-bottom:5px}.season small{color:var(--muted);line-height:1.5}.season-champ{color:var(--gold);font-weight:850;margin-top:8px;font-size:.88rem}
     .detail-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0c1524;margin-bottom:14px}.detail-avatar{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:#203754;color:var(--blue);font-size:1.3rem;font-weight:950}.detail-name{font-size:1.35rem;font-weight:950}.detail-elo{color:var(--gold);font-weight:950;font-size:1.2rem}.detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 22px}.mini-stat{border:1px solid var(--line);border-radius:12px;background:#0c1524;padding:12px}.mini-stat span{display:block;color:var(--muted);font-size:.76rem}.mini-stat strong{display:block;margin-top:6px;font-size:1.05rem}.subsection{margin-top:20px}
 
     .compare-controls{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:16px 0}.compare-controls select{min-width:0;width:100%;background:#09111e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px}.versus{color:var(--gold);font-weight:950;text-align:center}.compare-score{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:18px;background:#0c1524;text-align:center;margin:12px 0}.compare-name{font-weight:900;overflow-wrap:anywhere}.compare-num{font-size:clamp(1.7rem,5vw,2.6rem);font-weight:950;color:var(--gold);line-height:1.2}.compare-side small{display:block;color:var(--muted);margin-top:5px}.graph-wrap{border:1px solid var(--line);background:#0a1321;border-radius:14px;padding:12px;margin:16px 0}.graph-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}.graph-svg{width:100%;height:auto;display:block;overflow:visible}.graph-label{fill:var(--muted);font-size:11px}.graph-grid{stroke:#26354b;stroke-width:1;stroke-dasharray:4 5}.graph-line{fill:none;stroke:#7cbcff;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.graph-point{fill:#f6c75b;stroke:#0a1321;stroke-width:2}.trend-positive{color:var(--green);font-weight:900}.trend-negative{color:var(--red);font-weight:900}
@@ -43,6 +43,7 @@
     <button class="tab active" data-tab="ranking">🏆 랭킹</button>
     <button class="tab" data-tab="matches">⚔️ 최근 경기</button>
     <button class="tab" data-tab="players">🔎 선수 검색</button>
+    <button class="tab" data-tab="register">➕ 선수 등록</button>
     <button class="tab" data-tab="headtohead">⚔️ 상대 전적</button>
     <button class="tab" data-tab="seasons">📅 시즌 기록</button>
   </nav>
@@ -62,8 +63,8 @@ function showRanking(players, title="현재 시즌 랭킹", podium=true) {
   if (!players.length) return `<h2>${esc(title)}</h2><p class="empty">표시할 선수 기록이 없습니다.</p>`;
   const top = podium ? `<div class="podium">${players.slice(0,3).map((p,i)=>`<div class="podium-card ${i===0?'first':''}"><div class="medal">${medal(i)}</div><span class="podium-name">${playerButton(p.name)}</span><div class="podium-elo">${Number(p.elo).toLocaleString()} ELO</div><div class="podium-sub">${p.wins||0}승 ${p.losses||0}패 · 승률 ${pct(p)}%</div></div>`).join("")}</div>` : "";
   return `<div class="section-head"><h2>${esc(title)}</h2><span class="muted">${players.length}명</span></div>${top}
-    <div class="table-wrap"><table><thead><tr><th>순위</th><th>선수</th><th>ELO</th><th>등급</th><th>전적</th><th>승률</th></tr></thead><tbody>
-    ${players.map((p,i)=>`<tr><td class="rankno">${medal(i)}</td><td>${playerButton(p.name)}</td><td class="elo">${Number(p.elo).toLocaleString()}</td><td><span class="badge ${esc(p.rank)}">${esc(p.rank||"-")}</span></td><td>${p.wins||0}승 ${p.losses||0}패</td><td>${pct(p)}%</td></tr>`).join("")}
+    <div class="table-wrap"><table><thead><tr><th>순위</th><th>선수</th><th>종족</th><th>ELO</th><th>등급</th><th>전적</th><th>승률</th></tr></thead><tbody>
+    ${players.map((p,i)=>`<tr><td class="rankno">${medal(i)}</td><td>${playerButton(p.name)}</td><td>${esc(p.race||"미정")}</td><td class="elo">${Number(p.elo).toLocaleString()}</td><td><span class="badge ${esc(p.rank)}">${esc(p.rank||"-")}</span></td><td>${p.wins||0}승 ${p.losses||0}패</td><td>${pct(p)}%</td></tr>`).join("")}
     </tbody></table></div>`;
 }
 function showMatches(matches=boardData.matches||[], title="최근 경기") {
@@ -77,7 +78,7 @@ function playerResults(query) {
   const q=query.trim().toLowerCase();
   const players=(boardData.players||[]).filter(p=>p.name.toLowerCase().includes(q));
   if(!players.length)return `<p class="empty">검색 결과가 없습니다. 다른 이름으로 검색해 보세요.</p>`;
-  return `<div class="table-wrap"><table><thead><tr><th>순위</th><th>선수</th><th>ELO</th><th>등급</th><th>전적</th><th>승률</th></tr></thead><tbody>${players.map((p,i)=>`<tr><td>${p.position||i+1}위</td><td>${playerButton(p.name)}</td><td class="elo">${Number(p.elo).toLocaleString()}</td><td><span class="badge ${esc(p.rank)}">${esc(p.rank||"-")}</span></td><td>${p.wins||0}승 ${p.losses||0}패</td><td>${pct(p)}%</td></tr>`).join("")}</tbody></table></div><p class="muted">선수 이름을 누르면 상세 전적을 볼 수 있습니다.</p>`;
+  return `<div class="table-wrap"><table><thead><tr><th>순위</th><th>선수</th><th>종족</th><th>ELO</th><th>등급</th><th>전적</th><th>승률</th></tr></thead><tbody>${players.map((p,i)=>`<tr><td>${p.position||i+1}위</td><td>${playerButton(p.name)}</td><td>${esc(p.race||"미정")}</td><td class="elo">${Number(p.elo).toLocaleString()}</td><td><span class="badge ${esc(p.rank)}">${esc(p.rank||"-")}</span></td><td>${p.wins||0}승 ${p.losses||0}패</td><td>${pct(p)}%</td></tr>`).join("")}</tbody></table></div><p class="muted">선수 이름을 누르면 상세 전적을 볼 수 있습니다.</p>`;
 }
 function showPlayerSearch() {
   return `<h2 style="margin-bottom:14px">선수 검색</h2><input id="playerQuery" placeholder="선수 이름을 입력하세요" autocomplete="off"><div id="playerResults">${playerResults("")}</div>`;
@@ -91,7 +92,7 @@ function playerDetail(name) {
   const latest=matches.slice(0,10);
   const recentBlock=latest.length ? showMatches(latest, "최근 경기 (현재 시즌 최대 10경기)") : `<p class="empty">현재 시즌에 표시할 최근 경기가 없습니다.</p>`;
   return `<div class="section-head"><h2>선수 상세 정보</h2><button class="tab" id="backPlayers">← 선수 목록</button></div>
-    <div class="detail-head"><div class="detail-avatar">${esc(name.slice(0,1).toUpperCase())}</div><div><div class="detail-name">${esc(p.name)}</div><div class="muted">현재 시즌 · <span class="badge ${esc(p.rank)}">${esc(p.rank||"-")} 등급</span></div></div><div style="margin-left:auto" class="detail-elo">${Number(p.elo).toLocaleString()} ELO</div></div>
+    <div class="detail-head"><div class="detail-avatar">${esc(name.slice(0,1).toUpperCase())}</div><div><div class="detail-name">${esc(p.name)}</div><div class="muted">종족: ${esc(p.race||"미정")}</div><div class="muted">현재 시즌 · <span class="badge ${esc(p.rank)}">${esc(p.rank||"-")} 등급</span></div></div><div style="margin-left:auto" class="detail-elo">${Number(p.elo).toLocaleString()} ELO</div></div>
     <div class="detail-grid"><div class="mini-stat"><span>전체 승리</span><strong>${p.wins||0}승</strong></div><div class="mini-stat"><span>전체 패배</span><strong>${p.losses||0}패</strong></div><div class="mini-stat"><span>승률</span><strong>${pct(p)}%</strong></div><div class="mini-stat"><span>최근 경기 데이터</span><strong>${wins}승 ${losses}패</strong></div></div>
     ${eloGraph(name)}<div class="subsection">${recentBlock}</div>`;
 }
@@ -142,6 +143,37 @@ function renderHeadToHead() {
   const rateA=total?(aw/total*100).toFixed(1):'0.0', rateB=total?(bw/total*100).toFixed(1):'0.0';
   result.innerHTML=`<div class="compare-score"><div class="compare-side"><div class="compare-name">${esc(a)}</div><div class="compare-num">${aw}</div><small>승리 · ${rateA}%</small></div><div class="versus">${total}전</div><div class="compare-side"><div class="compare-name">${esc(b)}</div><div class="compare-num">${bw}</div><small>승리 · ${rateB}%</small></div></div><div class="section-head"><h3>맞대결 경기 기록</h3><span class="muted">${total}경기</span></div>${total?`<div class="matches">${matches.map(m=>`<article class="match"><div class="match-top"><div><span class="winner">${esc(m.winner)}</span> <span class="muted">승리 vs</span> <span class="loser">${esc(m.loser)}</span></div><span class="muted">경기 #${esc(m.id)}</span></div><div class="result">승자 ELO ${esc(m.winner_elo_before)} → ${esc(m.winner_elo_after)} · 패자 ELO ${esc(m.loser_elo_before)} → ${esc(m.loser_elo_after)}<br>${esc(m.played_at||'')}</div></article>`).join('')}</div>`:`<p class="empty">현재 제공된 경기 기록에는 두 선수의 맞대결이 없습니다.</p>`}<p class="muted" style="margin-top:12px">참고: 봇이 홈페이지에 보내는 data.json의 최근 경기 데이터 범위 안에서 계산됩니다.</p>`;
 }
+function showRegistration(){
+  return `<div class="section-head"><h2>➕ 홈페이지에서 선수 등록</h2><span class="muted">이름과 종족 입력</span></div>
+    <p class="muted">등록 신청은 GitHub 이슈로 전달되고, 봇이 확인한 뒤 랭킹에 반영됩니다. 신청하려면 GitHub 로그인이 필요합니다.</p>
+    <form id="registerForm" class="register-form">
+      <label for="registerName">선수 이름</label>
+      <input id="registerName" name="name" maxlength="24" required placeholder="예: 홍길동" autocomplete="off">
+      <label for="registerRace">스타크래프트 종족</label>
+      <select id="registerRace" name="race" required>
+        <option value="테란">테란</option><option value="저그">저그</option><option value="프로토스">프로토스</option><option value="랜덤">랜덤</option>
+      </select>
+      <button class="tab active" type="submit">GitHub에서 등록 신청하기 →</button>
+    </form>
+    <p class="muted">신청이 제출되면 봇이 실행 중일 때 약 1분 안에 등록을 처리합니다. 중복 이름은 등록되지 않습니다.</p>`;
+}
+function submitRegistration(event){
+  event.preventDefault();
+  const name=$('registerName').value.trim();
+  const race=$('registerRace').value;
+  if(!name){alert('선수 이름을 입력해 주세요.');return;}
+  if((boardData.players||[]).some(p=>p.name.toLowerCase()===name.toLowerCase())){alert('이미 등록된 선수 이름입니다.');return;}
+  // GitHub Pages is static, so the request is safely queued as a GitHub Issue rather than exposing a write token in public JavaScript.
+  const parts=location.pathname.split('/').filter(Boolean);
+  const owner=location.hostname.endsWith('.github.io')?location.hostname.split('.')[0]:'';
+  const repo=parts[0]||'sc-elo-board';
+  if(!owner){alert('GitHub Pages 주소에서 저장소 정보를 확인할 수 없습니다.');return;}
+  const title=`[선수등록] ${name}`;
+  const body=`선수 이름: ${name}\n종족: ${race}\n\nSC ELO BOARD 홈페이지에서 제출된 선수 등록 신청입니다.`;
+  const url=`https://github.com/${owner}/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  window.open(url,'_blank','noopener');
+}
+
 function showSeasons() {
   const seasons=boardData.seasons||[];
   if(!seasons.length)return `<h2>시즌 기록</h2><p class="empty">시즌 기록이 없습니다.</p>`;
@@ -168,10 +200,14 @@ function render(tab=currentTab) {
   if(tab==="ranking")content.innerHTML=showRanking(boardData.players);
   if(tab==="matches")content.innerHTML=showMatches();
   if(tab==="players")content.innerHTML=showPlayerSearch();
+  if(tab==="register")content.innerHTML=showRegistration();
   if(tab==="headtohead")content.innerHTML=showHeadToHead();
   if(tab==="seasons")content.innerHTML=showSeasons();
   if(tab==="players"){
     $("playerQuery").addEventListener("input",e=>{$("playerResults").innerHTML=playerResults(e.target.value);wirePlayerLinks($("playerResults"));});
+  }
+  if(tab==="register"){
+    const form=$("registerForm"); if(form)form.addEventListener("submit",submitRegistration);
   }
   if(tab==="headtohead"){
     const a=$("compareA"), b=$("compareB");
