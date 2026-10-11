@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-10-11T21:07:58+09:00",
+  "active_season": {
+    "id": 1,
+    "name": "시즌 1"
+  },
+  "players": [],
+  "matches": [],
+  "seasons": [
+    {
+      "id": 1,
+      "name": "시즌 1",
+      "started_at": "2026-10-11 11:43:06",
+      "ended_at": null,
+      "is_active": true,
+      "match_count": 0,
+      "players": []
+    }
+  ]
+}
