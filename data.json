@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T22:25:10+09:00",
+  "updated_at": "2026-10-11T22:26:14+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -8,6 +8,7 @@
     {
       "position": 1,
       "name": "뿡뿡이",
+      "race": "미정",
       "elo": 1501,
       "wins": 1,
       "losses": 1,
@@ -17,6 +18,7 @@
     {
       "position": 2,
       "name": "베타메일",
+      "race": "미정",
       "elo": 1501,
       "wins": 1,
       "losses": 1,
@@ -26,6 +28,7 @@
     {
       "position": 3,
       "name": "악진",
+      "race": "미정",
       "elo": 1500,
       "wins": 0,
       "losses": 0,
@@ -35,6 +38,7 @@
     {
       "position": 4,
       "name": "윤즈",
+      "race": "미정",
       "elo": 1498,
       "wins": 1,
       "losses": 1,
