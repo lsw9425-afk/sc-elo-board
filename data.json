@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T22:40:13+09:00",
+  "updated_at": "2026-10-11T22:46:21+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -7,8 +7,8 @@
   "players": [
     {
       "position": 1,
-      "name": "윤즈",
-      "race": "미정",
+      "name": "종족: 저그",
+      "race": "저그",
       "elo": 1516,
       "wins": 1,
       "losses": 0,
@@ -47,8 +47,8 @@
     },
     {
       "position": 5,
-      "name": "뿡뿡이",
-      "race": "미정",
+      "name": "종족: 테란",
+      "race": "테란",
       "elo": 1484,
       "wins": 0,
       "losses": 1,
@@ -68,7 +68,7 @@
       "players": [
         {
           "position": 1,
-          "name": "윤즈",
+          "name": "종족: 저그",
           "elo": 1516,
           "wins": 1,
           "losses": 0,
@@ -100,7 +100,7 @@
         },
         {
           "position": 5,
-          "name": "뿡뿡이",
+          "name": "종족: 테란",
           "elo": 1484,
           "wins": 0,
           "losses": 1,
