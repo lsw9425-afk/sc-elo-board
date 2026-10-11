@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T23:49:08+09:00",
+  "updated_at": "2026-10-12T00:01:51+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -30,9 +30,9 @@
       "name": "윤즈",
       "race": "저그",
       "elo": 1900,
-      "wins": 1,
+      "wins": 0,
       "losses": 0,
-      "win_rate": 100.0,
+      "win_rate": 0,
       "rank": "B"
     },
     {
@@ -51,8 +51,8 @@
       "race": "테란",
       "elo": 1700,
       "wins": 0,
-      "losses": 1,
-      "win_rate": 0.0,
+      "losses": 0,
+      "win_rate": 0,
       "rank": "C"
     }
   ],
@@ -86,7 +86,7 @@
           "position": 3,
           "name": "윤즈",
           "elo": 1900,
-          "wins": 1,
+          "wins": 0,
           "losses": 0,
           "rank": "B"
         },
@@ -103,7 +103,7 @@
           "name": "뿡뿡이",
           "elo": 1700,
           "wins": 0,
-          "losses": 1,
+          "losses": 0,
           "rank": "C"
         }
       ]
