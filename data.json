@@ -1,20 +1,85 @@
 {
-  "updated_at": "2026-10-11T21:07:58+09:00",
+  "updated_at": "2026-10-11T21:45:18+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
   },
-  "players": [],
-  "matches": [],
+  "players": [
+    {
+      "position": 1,
+      "name": "윤즈",
+      "elo": 1516,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "rank": "C"
+    },
+    {
+      "position": 2,
+      "name": "뿡뿡이",
+      "elo": 1501,
+      "wins": 1,
+      "losses": 1,
+      "win_rate": 50.0,
+      "rank": "C"
+    },
+    {
+      "position": 3,
+      "name": "베타메일",
+      "elo": 1483,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "rank": "D"
+    }
+  ],
+  "matches": [
+    {
+      "id": 1,
+      "winner": "뿡뿡이",
+      "loser": "베타메일",
+      "winner_elo_before": 1484,
+      "winner_elo_after": 1501,
+      "loser_elo_before": 1500,
+      "loser_elo_after": 1483,
+      "elo_change": 17,
+      "played_at": "2026-10-08 11:14:26"
+    }
+  ],
   "seasons": [
     {
       "id": 1,
       "name": "시즌 1",
-      "started_at": "2026-10-11 11:43:06",
+      "started_at": "2026-10-11 12:45:14",
       "ended_at": null,
       "is_active": true,
-      "match_count": 0,
-      "players": []
+      "match_count": 1,
+      "players": [
+        {
+          "position": 1,
+          "name": "윤즈",
+          "elo": 1516,
+          "wins": 1,
+          "losses": 0,
+          "rank": "C"
+        },
+        {
+          "position": 2,
+          "name": "뿡뿡이",
+          "elo": 1501,
+          "wins": 1,
+          "losses": 1,
+          "rank": "C"
+        },
+        {
+          "position": 3,
+          "name": "베타메일",
+          "elo": 1483,
+          "wins": 0,
+          "losses": 1,
+          "rank": "D"
+        }
+      ]
     }
   ]
 }
