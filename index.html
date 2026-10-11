@@ -18,6 +18,10 @@
     .player-link{background:none;border:0;padding:0;color:var(--text);font-weight:850;cursor:pointer;text-align:left}.player-link:hover{color:var(--blue);text-decoration:underline}.matches{display:grid;gap:10px}.match{padding:15px;border:1px solid var(--line);border-radius:13px;background:#0d1625}.match-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.winner{color:var(--green);font-weight:900}.loser{color:var(--red);font-weight:900}.result{color:var(--muted);font-size:.82rem;margin-top:9px;line-height:1.7}
     input{width:100%;background:#09111e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:0 0 13px;outline:none}input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #7cbcff1c}.season-list{display:grid;gap:10px}.season{padding:15px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:#0d1625;transition:.18s}.season:hover,.season.selected{border-color:var(--blue);background:#122137}.season strong{display:block;margin-bottom:5px}.season small{color:var(--muted);line-height:1.5}.season-champ{color:var(--gold);font-weight:850;margin-top:8px;font-size:.88rem}
     .detail-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0c1524;margin-bottom:14px}.detail-avatar{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:#203754;color:var(--blue);font-size:1.3rem;font-weight:950}.detail-name{font-size:1.35rem;font-weight:950}.detail-elo{color:var(--gold);font-weight:950;font-size:1.2rem}.detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 22px}.mini-stat{border:1px solid var(--line);border-radius:12px;background:#0c1524;padding:12px}.mini-stat span{display:block;color:var(--muted);font-size:.76rem}.mini-stat strong{display:block;margin-top:6px;font-size:1.05rem}.subsection{margin-top:20px}
+
+    .compare-controls{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:16px 0}.compare-controls select{min-width:0;width:100%;background:#09111e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px}.versus{color:var(--gold);font-weight:950;text-align:center}.compare-score{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:18px;background:#0c1524;text-align:center;margin:12px 0}.compare-name{font-weight:900;overflow-wrap:anywhere}.compare-num{font-size:clamp(1.7rem,5vw,2.6rem);font-weight:950;color:var(--gold);line-height:1.2}.compare-side small{display:block;color:var(--muted);margin-top:5px}.graph-wrap{border:1px solid var(--line);background:#0a1321;border-radius:14px;padding:12px;margin:16px 0}.graph-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}.graph-svg{width:100%;height:auto;display:block;overflow:visible}.graph-label{fill:var(--muted);font-size:11px}.graph-grid{stroke:#26354b;stroke-width:1;stroke-dasharray:4 5}.graph-line{fill:none;stroke:#7cbcff;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.graph-point{fill:#f6c75b;stroke:#0a1321;stroke-width:2}.trend-positive{color:var(--green);font-weight:900}.trend-negative{color:var(--red);font-weight:900}
+    @media(max-width:520px){.compare-controls{grid-template-columns:1fr;gap:8px}.versus{padding:0}.compare-score{padding:12px 7px}}
+
     footer{color:var(--muted);font-size:.78rem;text-align:center;margin-top:28px;line-height:1.8}
     @media(max-width:640px){.wrap{padding:18px 12px 40px}.stats{gap:8px}.stat{padding:12px}.panel{padding:13px}.podium{gap:7px}.podium-card{padding:14px 7px}.podium-name{font-size:.92rem}.podium-elo{font-size:1.05rem}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{gap:6px}.tab{padding:9px 11px;font-size:.86rem}}
   </style>
@@ -39,6 +43,7 @@
     <button class="tab active" data-tab="ranking">🏆 랭킹</button>
     <button class="tab" data-tab="matches">⚔️ 최근 경기</button>
     <button class="tab" data-tab="players">🔎 선수 검색</button>
+    <button class="tab" data-tab="headtohead">⚔️ 상대 전적</button>
     <button class="tab" data-tab="seasons">📅 시즌 기록</button>
   </nav>
   <main id="content" class="panel"><p class="empty">데이터를 불러오는 중입니다…</p></main>
@@ -87,8 +92,55 @@ function playerDetail(name) {
   const recentBlock=latest.length ? showMatches(latest, "최근 경기 (현재 시즌 최대 10경기)") : `<p class="empty">현재 시즌에 표시할 최근 경기가 없습니다.</p>`;
   return `<div class="section-head"><h2>선수 상세 정보</h2><button class="tab" id="backPlayers">← 선수 목록</button></div>
     <div class="detail-head"><div class="detail-avatar">${esc(name.slice(0,1).toUpperCase())}</div><div><div class="detail-name">${esc(p.name)}</div><div class="muted">현재 시즌 · <span class="badge ${esc(p.rank)}">${esc(p.rank||"-")} 등급</span></div></div><div style="margin-left:auto" class="detail-elo">${Number(p.elo).toLocaleString()} ELO</div></div>
-    <div class="detail-grid"><div class="mini-stat"><span>전체 승리</span><strong>${p.wins||0}승</strong></div><div class="mini-stat"><span>전체 패배</span><strong>${p.losses||0}패</strong></div><div class="mini-stat"><span>승률</span><strong>${pct(p)}%</strong></div><div class="mini-stat"><span>최근 50경기 내</span><strong>${wins}승 ${losses}패</strong></div></div>
-    <div class="subsection">${recentBlock}</div>`;
+    <div class="detail-grid"><div class="mini-stat"><span>전체 승리</span><strong>${p.wins||0}승</strong></div><div class="mini-stat"><span>전체 패배</span><strong>${p.losses||0}패</strong></div><div class="mini-stat"><span>승률</span><strong>${pct(p)}%</strong></div><div class="mini-stat"><span>최근 경기 데이터</span><strong>${wins}승 ${losses}패</strong></div></div>
+    ${eloGraph(name)}<div class="subsection">${recentBlock}</div>`;
+}
+function playerMatchList(name) {
+  return (boardData.matches||[]).filter(m=>m.winner===name||m.loser===name).sort((a,b)=>Number(a.id)-Number(b.id));
+}
+function eloHistory(name) {
+  const matches=playerMatchList(name);
+  const points=[];
+  for(const m of matches){
+    const isWinner=m.winner===name;
+    const before=Number(isWinner?m.winner_elo_before:m.loser_elo_before);
+    const after=Number(isWinner?m.winner_elo_after:m.loser_elo_after);
+    if(Number.isFinite(before)&&Number.isFinite(after)){
+      if(!points.length || points[points.length-1].elo!==before) points.push({elo:before,label:`경기 #${m.id} 전`,id:Number(m.id)});
+      points.push({elo:after,label:`경기 #${m.id} 후`,id:Number(m.id)});
+    }
+  }
+  return points;
+}
+function eloGraph(name) {
+  const pts=eloHistory(name);
+  if(!pts.length)return `<div class="graph-wrap"><div class="graph-head"><h3>📈 ELO 변화</h3><span class="muted">기록 없음</span></div><p class="empty">현재 제공된 경기 데이터에서 ELO 변화 기록을 찾지 못했습니다.</p></div>`;
+  const values=pts.map(p=>p.elo), min=Math.min(...values), max=Math.max(...values);
+  const pad=Math.max(50,Math.ceil((max-min)*.15)); const lo=Math.floor((min-pad)/50)*50, hi=Math.ceil((max+pad)/50)*50;
+  const W=680,H=250,L=48,R=16,T=18,B=32, iw=W-L-R, ih=H-T-B;
+  const x=i=>L+(pts.length===1?iw/2:i/(pts.length-1)*iw);
+  const y=v=>T+(hi-v)/(hi-lo||1)*ih;
+  const coords=pts.map((pt,i)=>`${x(i).toFixed(1)},${y(pt.elo).toFixed(1)}`).join(' ');
+  const grid=Array.from({length:5},(_,i)=>{const val=lo+(hi-lo)*i/4;const yy=y(val);return `<line class="graph-grid" x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}"/><text class="graph-label" x="${L-8}" y="${yy+4}" text-anchor="end">${Math.round(val)}</text>`}).join('');
+  const dots=pts.map((pt,i)=>`<circle class="graph-point" cx="${x(i)}" cy="${y(pt.elo)}" r="${i===pts.length-1?5:3}"/><title>${esc(pt.label)}: ${pt.elo} ELO</title>`).join('');
+  const first=pts[0].elo,last=pts[pts.length-1].elo,delta=last-first;
+  const trend=delta>0?`<span class="trend-positive">+${delta} ELO</span>`:delta<0?`<span class="trend-negative">${delta} ELO</span>`:`<strong>변화 없음</strong>`;
+  return `<div class="graph-wrap"><div class="graph-head"><h3>📈 ELO 변화</h3><span class="muted">제공된 최근 경기 ${Math.ceil((pts.length-1)/2)}회 기준 · ${trend}</span></div><svg class="graph-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(name)} ELO 변화 그래프">${grid}<polyline class="graph-line" points="${coords}"/>${dots}<text class="graph-label" x="${L}" y="${H-7}">과거</text><text class="graph-label" x="${W-R}" y="${H-7}" text-anchor="end">최근</text></svg><div class="muted">시작 ${first.toLocaleString()} ELO → 최근 ${last.toLocaleString()} ELO. 데이터는 현재 data.json에 포함된 경기 기록에 한정됩니다.</div></div>`;
+}
+function showHeadToHead() {
+  const players=[...(boardData.players||[])].sort((a,b)=>a.name.localeCompare(b.name,'ko'));
+  if(players.length<2)return `<h2>선수 간 상대 전적</h2><p class="empty">비교하려면 등록 선수가 두 명 이상 필요합니다.</p>`;
+  const opts=players.map(p=>`<option value="${esc(p.name)}">${esc(p.name)}</option>`).join('');
+  return `<div class="section-head"><h2>⚔️ 선수 간 상대 전적</h2><span class="muted">현재 제공된 경기 기록 기준</span></div><div class="compare-controls"><select id="compareA" aria-label="첫 번째 선수">${opts}</select><div class="versus">VS</div><select id="compareB" aria-label="두 번째 선수">${players.length>1?players.slice(1).map(p=>`<option value="${esc(p.name)}">${esc(p.name)}</option>`).join(''):opts}</select></div><div id="headToHeadResult"></div>`;
+}
+function renderHeadToHead() {
+  const result=$('headToHeadResult'), a=$('compareA')?.value, b=$('compareB')?.value;
+  if(!result||!a||!b)return;
+  if(a===b){result.innerHTML=`<p class="empty">서로 다른 선수 두 명을 선택해 주세요.</p>`;return;}
+  const matches=(boardData.matches||[]).filter(m=>(m.winner===a&&m.loser===b)||(m.winner===b&&m.loser===a)).sort((x,y)=>Number(y.id)-Number(x.id));
+  const aw=matches.filter(m=>m.winner===a).length, bw=matches.filter(m=>m.winner===b).length, total=matches.length;
+  const rateA=total?(aw/total*100).toFixed(1):'0.0', rateB=total?(bw/total*100).toFixed(1):'0.0';
+  result.innerHTML=`<div class="compare-score"><div class="compare-side"><div class="compare-name">${esc(a)}</div><div class="compare-num">${aw}</div><small>승리 · ${rateA}%</small></div><div class="versus">${total}전</div><div class="compare-side"><div class="compare-name">${esc(b)}</div><div class="compare-num">${bw}</div><small>승리 · ${rateB}%</small></div></div><div class="section-head"><h3>맞대결 경기 기록</h3><span class="muted">${total}경기</span></div>${total?`<div class="matches">${matches.map(m=>`<article class="match"><div class="match-top"><div><span class="winner">${esc(m.winner)}</span> <span class="muted">승리 vs</span> <span class="loser">${esc(m.loser)}</span></div><span class="muted">경기 #${esc(m.id)}</span></div><div class="result">승자 ELO ${esc(m.winner_elo_before)} → ${esc(m.winner_elo_after)} · 패자 ELO ${esc(m.loser_elo_before)} → ${esc(m.loser_elo_after)}<br>${esc(m.played_at||'')}</div></article>`).join('')}</div>`:`<p class="empty">현재 제공된 경기 기록에는 두 선수의 맞대결이 없습니다.</p>`}<p class="muted" style="margin-top:12px">참고: 봇이 홈페이지에 보내는 data.json의 최근 경기 데이터 범위 안에서 계산됩니다.</p>`;
 }
 function showSeasons() {
   const seasons=boardData.seasons||[];
@@ -116,9 +168,14 @@ function render(tab=currentTab) {
   if(tab==="ranking")content.innerHTML=showRanking(boardData.players);
   if(tab==="matches")content.innerHTML=showMatches();
   if(tab==="players")content.innerHTML=showPlayerSearch();
+  if(tab==="headtohead")content.innerHTML=showHeadToHead();
   if(tab==="seasons")content.innerHTML=showSeasons();
   if(tab==="players"){
     $("playerQuery").addEventListener("input",e=>{$("playerResults").innerHTML=playerResults(e.target.value);wirePlayerLinks($("playerResults"));});
+  }
+  if(tab==="headtohead"){
+    const a=$("compareA"), b=$("compareB");
+    if(a&&b){a.addEventListener("change",()=>{if(a.value===b.value){const other=[...b.options].find(o=>o.value!==a.value);if(other)b.value=other.value;}renderHeadToHead();});b.addEventListener("change",()=>{if(a.value===b.value){const other=[...a.options].find(o=>o.value!==b.value);if(other)a.value=other.value;}renderHeadToHead();});renderHeadToHead();}
   }
   if(tab==="seasons"){
     content.querySelectorAll("[data-season]").forEach(el=>el.addEventListener("click",()=>{
