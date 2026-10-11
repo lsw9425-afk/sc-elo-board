@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T22:53:12+09:00",
+  "updated_at": "2026-10-11T22:55:16+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -27,8 +27,8 @@
     },
     {
       "position": 3,
-      "name": "악진",
-      "race": "미정",
+      "name": "종족: 테란",
+      "race": "테란",
       "elo": 1500,
       "wins": 0,
       "losses": 0,
@@ -84,7 +84,7 @@
         },
         {
           "position": 3,
-          "name": "악진",
+          "name": "종족: 테란",
           "elo": 1500,
           "wins": 0,
           "losses": 0,
