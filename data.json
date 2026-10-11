@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T23:45:02+09:00",
+  "updated_at": "2026-10-11T23:46:10+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -7,37 +7,37 @@
   "players": [
     {
       "position": 1,
-      "name": "윤즈",
-      "race": "저그",
-      "elo": 1516,
-      "wins": 1,
+      "name": "대각",
+      "race": "테란",
+      "elo": 2100,
+      "wins": 0,
       "losses": 0,
-      "win_rate": 100.0,
-      "rank": "C"
+      "win_rate": 0,
+      "rank": "A"
     },
     {
       "position": 2,
-      "name": "종족: 변경 없음",
+      "name": "악진",
       "race": "테란",
-      "elo": 1500,
+      "elo": 2000,
       "wins": 0,
       "losses": 0,
       "win_rate": 0,
-      "rank": "C"
+      "rank": "B"
     },
     {
       "position": 3,
-      "name": "악진",
-      "race": "테란",
-      "elo": 1500,
-      "wins": 0,
+      "name": "윤즈",
+      "race": "저그",
+      "elo": 1900,
+      "wins": 1,
       "losses": 0,
-      "win_rate": 0,
-      "rank": "C"
+      "win_rate": 100.0,
+      "rank": "B"
     },
     {
       "position": 4,
-      "name": "대각",
+      "name": "종족: 변경 없음",
       "race": "테란",
       "elo": 1500,
       "wins": 0,
@@ -68,31 +68,31 @@
       "players": [
         {
           "position": 1,
-          "name": "윤즈",
-          "elo": 1516,
-          "wins": 1,
+          "name": "대각",
+          "elo": 2100,
+          "wins": 0,
           "losses": 0,
-          "rank": "C"
+          "rank": "A"
         },
         {
           "position": 2,
-          "name": "종족: 변경 없음",
-          "elo": 1500,
+          "name": "악진",
+          "elo": 2000,
           "wins": 0,
           "losses": 0,
-          "rank": "C"
+          "rank": "B"
         },
         {
           "position": 3,
-          "name": "악진",
-          "elo": 1500,
-          "wins": 0,
+          "name": "윤즈",
+          "elo": 1900,
+          "wins": 1,
           "losses": 0,
-          "rank": "C"
+          "rank": "B"
         },
         {
           "position": 4,
-          "name": "대각",
+          "name": "종족: 변경 없음",
           "elo": 1500,
           "wins": 0,
           "losses": 0,
