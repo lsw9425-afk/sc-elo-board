@@ -154,17 +154,21 @@ function showRegistration(){
       <input id="registerName" name="name" maxlength="24" required placeholder="예: 홍길동" autocomplete="off">
       <label for="registerRace">스타크래프트 종족</label>
       <select id="registerRace" name="race" required>
-        <option value="테란">테란</option><option value="저그">저그</option><option value="프로토스">프로토스</option><option value="랜덤">랜덤</option>
+        <option value="테란">테란</option><option value="저그">저그</option><option value="프로토스">프로토스</option><option value="랜덤">랜덤</option><option value="미정">미정</option>
       </select>
+      <label for="registerElo">초기 ELO (기본 1500, 다른 값은 저장소 관리자 전용)</label>
+      <input id="registerElo" name="elo" type="number" min="0" max="10000" step="1" value="1500" required>
       <button class="tab active" type="submit">GitHub에서 등록 신청하기 →</button>
     </form>
-    <p class="muted">신청이 제출되면 봇이 실행 중일 때 약 1분 안에 등록을 처리합니다. 중복 이름은 등록되지 않습니다.</p>`;
+    <p class="muted">신청이 제출되면 봇이 실행 중일 때 약 1분 안에 처리됩니다. ELO를 1500이 아닌 값으로 지정하려면 저장소 관리자 권한이 필요하며, 중복 이름은 등록되지 않습니다.</p>`;
 }
 function submitRegistration(event){
   event.preventDefault();
   const name=$('registerName').value.trim();
   const race=$('registerRace').value;
+  const elo=Number($('registerElo').value);
   if(!name){alert('선수 이름을 입력해 주세요.');return;}
+  if(!Number.isInteger(elo)||elo<0||elo>10000){alert('ELO는 0~10000 사이의 정수로 입력해 주세요.');return;}
   if((boardData.players||[]).some(p=>p.name.toLowerCase()===name.toLowerCase())){alert('이미 등록된 선수 이름입니다.');return;}
   // GitHub Pages is static, so the request is safely queued as a GitHub Issue rather than exposing a write token in public JavaScript.
   const parts=location.pathname.split('/').filter(Boolean);
@@ -172,7 +176,7 @@ function submitRegistration(event){
   const repo=parts[0]||'sc-elo-board';
   if(!owner){alert('GitHub Pages 주소에서 저장소 정보를 확인할 수 없습니다.');return;}
   const title=`[선수등록] ${name}`;
-  const body=`선수 이름: ${name}\n종족: ${race}\n\nSC ELO BOARD 홈페이지에서 제출된 선수 등록 신청입니다.`;
+  const body=`선수 이름: ${name}\n종족: ${race}\nELO: ${elo}\n\nSC ELO BOARD 홈페이지에서 제출된 선수 등록 신청입니다.`;
   const url=`https://github.com/${owner}/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
   window.open(url,'_blank','noopener');
 }
@@ -180,10 +184,10 @@ function submitRegistration(event){
 
 function showBulkRegistration(){
   return `<div class="section-head"><h2>📋 선수 일괄 등록</h2><span class="muted">저장소 관리자 전용</span></div>
-    <p class="muted">한 줄에 한 명씩 입력해 주세요. 형식은 <b>선수이름, 종족</b>입니다. 이미 등록된 이름은 자동으로 건너뜁니다. 신청 후 GitHub 로그인 화면에서 요청을 제출해야 합니다.</p>
+    <p class="muted">한 줄에 한 명씩 입력해 주세요. 형식은 <b>선수이름, 종족, ELO</b>입니다. ELO는 생략하면 1500입니다. 이미 등록된 이름은 자동으로 건너뜁니다. 신청 후 GitHub 로그인 화면에서 요청을 제출해야 합니다.</p>
     <form id="bulkRegisterForm" class="register-form">
       <label for="bulkRoster">선수 명단 (최대 100명)</label>
-      <textarea id="bulkRoster" name="roster" rows="9" maxlength="12000" required placeholder="가젯, 테란&#10;오호, 프로토스&#10;환이, 저그&#10;엽이, 테란&#10;쉰팬, 저그"></textarea>
+      <textarea id="bulkRoster" name="roster" rows="9" maxlength="12000" required placeholder="가젯, 테란, 1500&#10;오호, 프로토스, 1600&#10;환이, 저그&#10;엽이, 테란, 1450&#10;쉰팬, 저그"></textarea>
       <button class="tab active" type="submit">GitHub에서 일괄 등록 신청하기 →</button>
     </form>
     <p class="muted">관리자 권한 확인 후 약 1분 내 처리됩니다. 기존 선수의 ELO와 전적은 변경되지 않습니다.</p>`;
@@ -198,8 +202,8 @@ function submitBulkRegistration(event){
   const seen=new Set();
   for(let i=0;i<lines.length;i++){
     const parts=lines[i].split(/[,，\t]/).map(x=>x.trim());
-    const name=parts[0], race=parts[1]||'미정';
-    if(!name||name.length>24||/[\\/\r\n]/.test(name)||parts.length>2||!allowed.includes(race)){
+    const name=parts[0], race=parts[1]||'미정', elo=parts[2]?Number(parts[2]):1500;
+    if(!name||name.length>24||/[\\/\r\n]/.test(name)||parts.length>3||!allowed.includes(race)||!Number.isInteger(elo)||elo<0||elo>10000){
       alert(`${i+1}행 형식이 올바르지 않습니다. 예: 홍길동, 테란`);return;
     }
     const key=name.toLocaleLowerCase('ko-KR');
@@ -256,7 +260,7 @@ function showManagement(){
     <form id="manageForm" class="register-form">
       <label for="manageAction">작업</label><select id="manageAction"><option value="edit">선수 정보 수정</option><option value="delete">선수 삭제</option></select>
       <label for="managePlayer">대상 선수</label><select id="managePlayer" required>${opts}</select>
-      <div id="editFields"><label for="manageNewName">새 선수 이름 (변경하지 않으면 비워 두기)</label><input id="manageNewName" maxlength="24" placeholder="새 이름 입력"><label for="manageRace">종족</label><select id="manageRace"><option value="변경 없음">변경 없음</option><option value="테란">테란</option><option value="저그">저그</option><option value="프로토스">프로토스</option><option value="랜덤">랜덤</option><option value="미정">미정</option></select></div>
+      <div id="editFields"><label for="manageNewName">새 선수 이름 (변경하지 않으면 비워 두기)</label><input id="manageNewName" maxlength="24" placeholder="새 이름 입력"><label for="manageRace">종족</label><select id="manageRace"><option value="변경 없음">변경 없음</option><option value="테란">테란</option><option value="저그">저그</option><option value="프로토스">프로토스</option><option value="랜덤">랜덤</option><option value="미정">미정</option></select><label for="manageElo">ELO (변경하지 않으면 비워 두기)</label><input id="manageElo" type="number" min="0" max="10000" step="1" placeholder="예: 1750"></div>
       <p id="deleteWarning" class="muted" style="display:none">삭제하면 현재 랭킹에서 제외됩니다. 현재 ELO/전적은 보관하고 기존 경기 및 시즌 기록은 유지합니다.</p>
       <button class="tab active" type="submit">GitHub에서 관리 요청하기 →</button>
     </form>`;
@@ -267,6 +271,8 @@ function submitManagement(event){
   const name=$('managePlayer').value;
   const newName=$('manageNewName').value.trim();
   const race=$('manageRace').value;
+  const eloText=$('manageElo').value.trim();
+  const elo=eloText===''?null:Number(eloText);
   const parts=location.pathname.split('/').filter(Boolean);
   const owner=location.hostname.endsWith('.github.io')?location.hostname.split('.')[0]:'';
   const repo=parts[0]||'sc-elo-board';
@@ -277,9 +283,10 @@ function submitManagement(event){
     title=`[선수관리:삭제] ${name}`;
     body=`작업: 삭제\n선수 이름: ${name}\n\nSC ELO BOARD 홈페이지에서 제출된 선수 삭제 요청입니다.`;
   }else{
-    if(!newName&&race==='변경 없음'){alert('새 이름이나 종족 중 하나 이상을 변경해 주세요.');return;}
+    if(!newName&&race==='변경 없음'&&elo===null){alert('새 이름, 종족 또는 ELO 중 하나 이상을 변경해 주세요.');return;}
+    if(elo!==null&&(!Number.isInteger(elo)||elo<0||elo>10000)){alert('ELO는 0~10000 사이의 정수로 입력해 주세요.');return;}
     title=`[선수관리:수정] ${name}`;
-    body=`작업: 수정\n기존 선수 이름: ${name}\n새 선수 이름: ${newName}\n종족: ${race}\n\nSC ELO BOARD 홈페이지에서 제출된 선수 정보 수정 요청입니다.`;
+    body=`작업: 수정\n기존 선수 이름: ${name}\n새 선수 이름: ${newName}\n종족: ${race}\nELO: ${elo===null?'변경 없음':elo}\n\nSC ELO BOARD 홈페이지에서 제출된 선수 정보 수정 요청입니다.`;
   }
   const url=`https://github.com/${owner}/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
   window.open(url,'_blank','noopener');
