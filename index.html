@@ -45,6 +45,7 @@
     <button class="tab" data-tab="matchregister">📝 경기 결과 등록</button>
     <button class="tab" data-tab="players">🔎 선수 검색</button>
     <button class="tab" data-tab="register">➕ 선수 등록</button>
+    <button class="tab" data-tab="bulkregister">📋 선수 일괄 등록</button>
     <button class="tab" data-tab="manage">🛠️ 선수 관리</button>
     <button class="tab" data-tab="headtohead">⚔️ 상대 전적</button>
     <button class="tab" data-tab="seasons">📅 시즌 기록</button>
@@ -177,6 +178,45 @@ function submitRegistration(event){
 }
 
 
+function showBulkRegistration(){
+  return `<div class="section-head"><h2>📋 선수 일괄 등록</h2><span class="muted">저장소 관리자 전용</span></div>
+    <p class="muted">한 줄에 한 명씩 입력해 주세요. 형식은 <b>선수이름, 종족</b>입니다. 이미 등록된 이름은 자동으로 건너뜁니다. 신청 후 GitHub 로그인 화면에서 요청을 제출해야 합니다.</p>
+    <form id="bulkRegisterForm" class="register-form">
+      <label for="bulkRoster">선수 명단 (최대 100명)</label>
+      <textarea id="bulkRoster" name="roster" rows="9" maxlength="12000" required placeholder="가젯, 테란&#10;오호, 프로토스&#10;환이, 저그&#10;엽이, 테란&#10;쉰팬, 저그"></textarea>
+      <button class="tab active" type="submit">GitHub에서 일괄 등록 신청하기 →</button>
+    </form>
+    <p class="muted">관리자 권한 확인 후 약 1분 내 처리됩니다. 기존 선수의 ELO와 전적은 변경되지 않습니다.</p>`;
+}
+function submitBulkRegistration(event){
+  event.preventDefault();
+  const raw=$('bulkRoster').value.trim();
+  const lines=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(!lines.length){alert('선수 명단을 입력해 주세요.');return;}
+  if(lines.length>100){alert('한 번에 최대 100명까지 등록할 수 있습니다.');return;}
+  const allowed=['테란','저그','프로토스','랜덤','미정'];
+  const seen=new Set();
+  for(let i=0;i<lines.length;i++){
+    const parts=lines[i].split(/[,，\t]/).map(x=>x.trim());
+    const name=parts[0], race=parts[1]||'미정';
+    if(!name||name.length>24||/[\\/\r\n]/.test(name)||parts.length>2||!allowed.includes(race)){
+      alert(`${i+1}행 형식이 올바르지 않습니다. 예: 홍길동, 테란`);return;
+    }
+    const key=name.toLocaleLowerCase('ko-KR');
+    if(seen.has(key)){alert(`명단에 중복된 이름이 있습니다: ${name}`);return;}
+    seen.add(key);
+  }
+  if(!confirm(`${lines.length}명 일괄 등록을 신청할까요? 이미 등록된 선수는 자동으로 건너뜁니다.`))return;
+  const owner=location.hostname.endsWith('.github.io')?location.hostname.split('.')[0]:'';
+  const parts=location.pathname.split('/').filter(Boolean);
+  const repo=parts[0]||'sc-elo-board';
+  if(!owner){alert('GitHub Pages 주소에서 저장소 정보를 확인할 수 없습니다.');return;}
+  const title=`[선수일괄등록] ${lines.length}명`;
+  const body=`선수 명단:\n${lines.join('\n')}\n\nSC ELO BOARD 홈페이지에서 제출된 선수 일괄 등록 신청입니다.`;
+  const url=`https://github.com/${owner}/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  window.open(url,'_blank','noopener');
+}
+
 function showMatchRegistration(){
   const players=[...(boardData.players||[])].sort((a,b)=>a.name.localeCompare(b.name,'ko'));
   if(players.length<2)return `<h2>📝 경기 결과 등록</h2><p class="empty">경기를 등록하려면 선수가 두 명 이상 필요합니다.</p>`;
@@ -273,6 +313,7 @@ function render(tab=currentTab) {
   if(tab==="matchregister")content.innerHTML=showMatchRegistration();
   if(tab==="players")content.innerHTML=showPlayerSearch();
   if(tab==="register")content.innerHTML=showRegistration();
+  if(tab==="bulkregister")content.innerHTML=showBulkRegistration();
   if(tab==="manage")content.innerHTML=showManagement();
   if(tab==="headtohead")content.innerHTML=showHeadToHead();
   if(tab==="seasons")content.innerHTML=showSeasons();
@@ -281,6 +322,9 @@ function render(tab=currentTab) {
   }
   if(tab==="register"){
     const form=$("registerForm"); if(form)form.addEventListener("submit",submitRegistration);
+  }
+  if(tab==="bulkregister"){
+    const form=$("bulkRegisterForm"); if(form)form.addEventListener("submit",submitBulkRegistration);
   }
   if(tab==="matchregister"){
     const form=$("matchRegisterForm");
