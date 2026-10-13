@@ -24,6 +24,40 @@
 
     footer{color:var(--muted);font-size:.78rem;text-align:center;margin-top:28px;line-height:1.8}
     @media(max-width:640px){.wrap{padding:18px 12px 40px}.stats{gap:8px}.stat{padding:12px}.panel{padding:13px}.podium{gap:7px}.podium-card{padding:14px 7px}.podium-name{font-size:.92rem}.podium-elo{font-size:1.05rem}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{gap:6px}.tab{padding:9px 11px;font-size:.86rem}}
+  
+    /* === SC ELO BOARD: redesigned home screen === */
+    :root{--bg:#070b13;--panel:#101827;--panel2:#0b1220;--line:#27364d;--text:#f3f6fc;--muted:#96a8c1;--gold:#ffcc57;--blue:#67c6ff;--green:#72e0b0;--red:#ff8585}
+    body{background:#070b13;background-image:radial-gradient(ellipse at 50% 0%,rgba(24,87,145,.30),transparent 38%),linear-gradient(180deg,#090f1c 0%,#070b13 65%);color:var(--text)}
+    .wrap{width:min(1240px,100%);padding:30px 26px 52px}
+    .hero{position:relative;isolation:isolate;overflow:hidden;min-height:250px;padding:38px 40px 30px;border:1px solid #2c4565;border-radius:26px;background:linear-gradient(115deg,rgba(20,42,70,.97),rgba(12,21,36,.95) 57%,rgba(14,28,49,.92));box-shadow:0 22px 60px #0005,inset 0 1px #ffffff0d;margin-bottom:22px}
+    .hero::before{content:"SC";position:absolute;z-index:-1;right:4%;top:50%;transform:translateY(-55%) rotate(-8deg);font-size:clamp(8rem,22vw,17rem);line-height:1;font-weight:1000;letter-spacing:-.12em;color:#8bcaff0b;-webkit-text-stroke:2px #8bcaff0b;pointer-events:none}
+    .hero::after{content:"";position:absolute;z-index:-1;right:9%;top:-95px;width:360px;height:360px;border:1px solid #80c4ff18;border-radius:50%;box-shadow:0 0 0 30px #80c4ff05,0 0 0 65px #80c4ff04;pointer-events:none}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:#9ed4ff;font-size:.76rem;font-weight:850;letter-spacing:.19em;text-transform:uppercase}.eyebrow::before{content:"";width:28px;height:3px;background:var(--gold);box-shadow:0 0 16px #ffcc5770}
+    h1{font-size:clamp(2.6rem,7vw,5.1rem);line-height:.98;letter-spacing:-.065em;font-weight:1000;margin:20px 0 14px;text-shadow:0 8px 36px #0005}
+    .sub{max-width:570px;color:#bdcce0;font-size:1.02rem;line-height:1.8;margin:0 0 20px}
+    .live{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #3b5a78;border-radius:999px;background:#07111dcc;color:#d9e9fb;font-size:.8rem}
+    .dot{box-shadow:0 0 0 4px #72e0b018,0 0 14px #72e0b055}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 24px}
+    .stat{position:relative;overflow:hidden;padding:20px 22px;border:1px solid #263951;border-radius:18px;background:linear-gradient(145deg,#121e30,#0c1422);box-shadow:0 12px 28px #0002}
+    .stat::after{content:"";position:absolute;right:-24px;top:-38px;width:105px;height:105px;border:1px solid #80c4ff14;border-radius:50%;box-shadow:0 0 0 16px #80c4ff04}
+    .stat span{display:block;position:relative;z-index:1;color:#9fb2cb;font-size:.82rem;font-weight:700;margin-bottom:10px}
+    .stat strong{display:block;position:relative;z-index:1;font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.04em;font-weight:900;color:#f4f7ff;font-variant-numeric:tabular-nums}
+    .tabs{display:flex;gap:7px;position:sticky;top:8px;z-index:20;overflow-x:auto;flex-wrap:nowrap;margin:0 0 18px;padding:9px;border:1px solid #263951;border-radius:16px;background:rgba(7,13,23,.92);backdrop-filter:blur(18px);box-shadow:0 12px 30px #0004;scrollbar-width:thin}
+    .tab{flex:0 0 auto;min-height:43px;padding:11px 15px;border:1px solid transparent;border-radius:10px;color:#aebed2;font-weight:800;white-space:nowrap;transition:background .18s,border-color .18s,color .18s}
+    .tab:hover{color:#fff;background:#16243a}.tab.active{color:#101723;background:linear-gradient(135deg,#ffda78,#f4b83f);border-color:#ffe49c;box-shadow:0 5px 18px #ffcc5725}
+    .panel{padding:25px;border:1px solid #26364d;border-radius:22px;background:linear-gradient(160deg,rgba(17,27,43,.98),rgba(10,16,27,.98));box-shadow:0 18px 45px #0003;min-height:300px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;padding-bottom:15px;border-bottom:1px solid #27364d}
+    .section-head h2{font-size:1.35rem;font-weight:900;letter-spacing:-.035em;margin:0}
+    .section-head .muted{padding:5px 10px;border:1px solid #344762;border-radius:999px;background:#0b1422;color:#a9bed7;font-size:.78rem}
+    .podium{gap:14px;margin:0 0 25px}.podium-card{position:relative;overflow:hidden;padding:22px 14px;border:1px solid #2b3d55;border-radius:18px;background:linear-gradient(155deg,#172438,#0d1523);box-shadow:0 12px 24px #0002}.podium-card.first{border-color:#8b7137;background:linear-gradient(155deg,#3a301c,#151b26);box-shadow:inset 0 1px #ffdc8433,0 14px 32px #0003}.podium-card.first::before{content:"CHAMPION";display:block;margin:-7px 0 12px;color:#ffda78;font-size:.62rem;font-weight:950;letter-spacing:.2em}.medal{filter:drop-shadow(0 5px 9px #0005)}.podium-name{display:block;margin:10px 0 6px}.podium-name .player-link{font-weight:900;font-size:1rem}.podium-elo{font-size:1.35rem;font-weight:950;letter-spacing:-.035em;color:#ffda78}.podium-sub{color:#a8b8cd;font-size:.78rem;margin-top:7px}
+    .table-wrap{overflow-x:auto;border:1px solid #27364d;border-radius:13px}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}thead{background:#0b1422}th{padding:14px 13px;color:#8fa7c4;text-align:left;font-size:.75rem;font-weight:850;letter-spacing:.08em;border-bottom:1px solid #27364d}td{padding:14px 13px;border-bottom:1px solid #202d40}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#17243a}tbody tr:nth-child(-n+3) td:first-child{font-weight:950;color:#ffcf62}.elo{font-weight:900;color:#a8d8ff}.player-link{color:#eaf3ff;font-weight:800;text-align:left}.player-link:hover{color:#ffda78;text-decoration:underline}
+    .match,.season,.detail-head,.mini-stat,.compare-score,.graph-wrap{border:1px solid #26364d;border-radius:14px;background:linear-gradient(145deg,#131f31,#0d1522)}.match{padding:16px}.match:hover{border-color:#4b6b91}.register-form input,.register-form select,input,select,textarea{border-color:#34445c;border-radius:10px;background:#080f1b;color:#f1f6ff}.register-form button[type="submit"]{min-height:48px;border-radius:11px;background:linear-gradient(135deg,#ffda78,#f3b63b);color:#111722;font-weight:900}
+    footer{margin-top:30px;padding:22px 8px;border-top:1px solid #243249;color:#71859f;font-size:.78rem;text-align:center;line-height:1.9}
+    button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+    @media(max-width:760px){.wrap{padding:14px 12px 30px}.hero{min-height:0;padding:28px 22px 24px;border-radius:20px}.hero::before{right:-2%;top:58%;font-size:9rem}.hero::after{right:-25%;top:-130px;width:280px;height:280px}.eyebrow{font-size:.65rem;letter-spacing:.12em}h1{font-size:clamp(2.35rem,11vw,4rem);margin:18px 0 12px}.sub{font-size:.9rem;line-height:1.65;max-width:95%}.stats{gap:8px;margin-bottom:18px}.stat{padding:14px 11px;border-radius:13px}.stat span{font-size:.68rem;line-height:1.4;min-height:2em}.stat strong{font-size:clamp(1rem,4.4vw,1.45rem);overflow-wrap:anywhere}.tabs{top:4px;gap:5px;padding:6px;border-radius:13px;margin-bottom:13px}.tab{min-height:40px;padding:10px 12px;font-size:.79rem}.panel{padding:15px;border-radius:17px}.section-head h2{font-size:1.1rem}.podium{gap:7px}.podium-card{padding:15px 7px;border-radius:13px}.podium-card.first::before{font-size:.5rem;letter-spacing:.1em}.podium-name .player-link{font-size:.82rem}.podium-elo{font-size:1rem}.podium-sub{font-size:.67rem;line-height:1.5}th,td{padding:11px 8px;font-size:.78rem}.table-wrap{overflow-x:auto}footer{font-size:.7rem}}
+    @media(max-width:420px){.hero{padding:24px 17px 20px}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stat{padding:12px 8px}.stat span{font-size:.62rem}.stat strong{font-size:1rem}.panel{padding:12px}.podium{grid-template-columns:repeat(3,minmax(0,1fr))}.podium-card{padding:12px 4px}.podium-name .player-link{font-size:.74rem}.podium-sub{font-size:.61rem}.table-wrap th:nth-child(3),.table-wrap td:nth-child(3),.table-wrap th:nth-child(5),.table-wrap td:nth-child(5){display:none}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
   </style>
 </head>
 <body>
@@ -187,7 +221,7 @@ function showBulkRegistration(){
     <p class="muted">한 줄에 한 명씩 입력해 주세요. 형식은 <b>선수이름, 종족, ELO</b>입니다. ELO는 생략하면 1500입니다. 이미 등록된 이름은 자동으로 건너뜁니다. 신청 후 GitHub 로그인 화면에서 요청을 제출해야 합니다.</p>
     <form id="bulkRegisterForm" class="register-form">
       <label for="bulkRoster">선수 명단 (최대 100명)</label>
-      <textarea id="bulkRoster" name="roster" rows="9" maxlength="12000" required placeholder="뿡뿡이, 테란, 1500&#10;니트, 프로토스, 1600&#10;윤즈, 저그&#10;악진, 테란, 1450&#10;캐처버, 저그"></textarea>
+      <textarea id="bulkRoster" name="roster" rows="9" maxlength="12000" required placeholder="가젯, 테란, 1500&#10;오호, 프로토스, 1600&#10;환이, 저그&#10;엽이, 테란, 1450&#10;쉰팬, 저그"></textarea>
       <button class="tab active" type="submit">GitHub에서 일괄 등록 신청하기 →</button>
     </form>
     <p class="muted">관리자 권한 확인 후 약 1분 내 처리됩니다. 기존 선수의 ELO와 전적은 변경되지 않습니다.</p>`;
