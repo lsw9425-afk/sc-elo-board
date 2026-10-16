@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T16:41:20+09:00",
+  "updated_at": "2026-10-16T16:42:03+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -110,10 +110,18 @@
       "title": "팀대항전",
       "team_a": "A",
       "team_b": "B",
-      "score_a": 0,
+      "score_a": 1,
       "score_b": 0,
       "played_at": "2026-10-16 07:33:59",
-      "games": []
+      "games": [
+        {
+          "id": 1,
+          "team_a_player": "홍길동",
+          "team_b_player": "가나다",
+          "winner_team": "A",
+          "played_at": "2026-10-16 07:42:02"
+        }
+      ]
     }
   ]
 }
