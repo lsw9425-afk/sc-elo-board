@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T16:29:51+09:00",
+  "updated_at": "2026-10-16T16:32:49+09:00",
   "active_season": {
     "id": 1,
     "name": "시즌 1"
@@ -8,7 +8,6 @@
     {
       "position": 1,
       "name": "대각",
-      "race": "테란",
       "elo": 2100,
       "wins": 0,
       "losses": 0,
@@ -18,7 +17,6 @@
     {
       "position": 2,
       "name": "악진",
-      "race": "테란",
       "elo": 2000,
       "wins": 0,
       "losses": 0,
@@ -28,7 +26,6 @@
     {
       "position": 3,
       "name": "윤즈",
-      "race": "저그",
       "elo": 1900,
       "wins": 0,
       "losses": 0,
@@ -38,7 +35,6 @@
     {
       "position": 4,
       "name": "베타메일",
-      "race": "테란",
       "elo": 1850,
       "wins": 0,
       "losses": 0,
@@ -48,7 +44,6 @@
     {
       "position": 5,
       "name": "뿡뿡이",
-      "race": "테란",
       "elo": 1700,
       "wins": 0,
       "losses": 0,
@@ -108,5 +103,6 @@
         }
       ]
     }
-  ]
+  ],
+  "team_battles": []
 }
