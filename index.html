@@ -77,6 +77,7 @@
     <button class="tab active" data-tab="ranking">🏆 랭킹</button>
     <button class="tab" data-tab="matches">⚔️ 최근 경기</button>
     <button class="tab" data-tab="teammatches">🛡️ 대항전 기록</button>
+    <button class="tab" data-tab="teambattleinput">✍️ 대항전 입력</button>
     <button class="tab" data-tab="matchregister">📝 경기 결과 등록</button>
     <button class="tab" data-tab="players">🔎 선수 검색</button>
     <button class="tab" data-tab="register">➕ 선수 등록</button>
@@ -327,6 +328,57 @@ function submitManagement(event){
   window.open(url,'_blank','noopener');
 }
 
+function showTeamBattleInput() {
+  const battles=boardData.team_battles||[];
+  const battleOptions=battles.map(b=>`<option value="${esc(b.id)}">#${esc(b.id)} · ${esc(b.title)} (${esc(b.team_a)} vs ${esc(b.team_b)})</option>`).join('');
+  return `<div class="section-head"><h2>✍️ 대항전 결과 입력</h2><span class="muted">개인 ELO와 별도 기록</span></div>
+    <p class="muted">다른 클랜 선수도 선수 등록 없이 이름을 직접 입력할 수 있습니다. 제출하면 GitHub에 요청 초안이 열립니다. 요청을 제출한 뒤 관리자가 확인하고 반영해야 홈페이지 기록에 나타납니다.</p>
+    <div class="subsection"><h3>① 새 대항전 등록 요청</h3>
+      <form id="teamBattleCreateForm" class="register-form">
+        <label for="tbTitle">대항전 이름</label><input id="tbTitle" maxlength="100" required placeholder="예: 10월 정기 클랜전">
+        <label for="tbTeamA">우리 클랜 이름</label><input id="tbTeamA" maxlength="80" required placeholder="예: SC ELO 클랜">
+        <label for="tbTeamB">상대 클랜 이름</label><input id="tbTeamB" maxlength="80" required placeholder="예: 상대 클랜">
+        <button class="tab active" type="submit">GitHub에 대항전 등록 요청 →</button>
+      </form>
+    </div>
+    <div class="subsection"><h3>② 개인 경기 결과 등록 요청</h3>
+      ${battles.length?`<form id="teamBattleGameForm" class="register-form">
+        <label for="tbBattleId">대항전 선택</label><select id="tbBattleId" required>${battleOptions}</select>
+        <label for="tbPlayerA">첫 번째 팀 선수 이름</label><input id="tbPlayerA" maxlength="80" required placeholder="선수 등록 여부와 관계없이 입력 가능">
+        <label for="tbPlayerB">두 번째 팀 선수 이름</label><input id="tbPlayerB" maxlength="80" required placeholder="상대 선수 이름 직접 입력">
+        <label for="tbWinner">승리한 팀</label><select id="tbWinner" required><option value="A">첫 번째 팀</option><option value="B">두 번째 팀</option></select>
+        <button class="tab active" type="submit">GitHub에 개인 경기 등록 요청 →</button>
+      </form>`:`<p class="empty">먼저 위에서 새 대항전 등록 요청을 제출하고, 관리자가 대항전을 등록한 뒤 개인 경기 결과를 입력할 수 있습니다.</p>`}
+    </div>
+    <p class="muted">참고: GitHub Pages는 정적 홈페이지라 이 화면에서 데이터베이스에 직접 저장하지 않습니다. 요청 제출 후 관리자의 확인·등록이 필요합니다. 대항전 기록은 개인 ELO와 승패에 반영되지 않습니다.</p>`;
+}
+function openTeamBattleIssue(title, body) {
+  const owner=location.hostname.endsWith('.github.io')?location.hostname.split('.')[0]:'';
+  const parts=location.pathname.split('/').filter(Boolean);
+  const repo=parts[0]||'sc-elo-board';
+  if(!owner){alert('GitHub Pages 주소에서 저장소 정보를 확인할 수 없습니다.');return;}
+  const url=`https://github.com/${owner}/${repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  window.open(url,'_blank','noopener');
+}
+function submitTeamBattleCreate(event) {
+  event.preventDefault();
+  const title=$('tbTitle').value.trim(), teamA=$('tbTeamA').value.trim(), teamB=$('tbTeamB').value.trim();
+  if(!title||!teamA||!teamB){alert('대항전 이름과 두 클랜 이름을 모두 입력해 주세요.');return;}
+  if(teamA.toLocaleLowerCase('ko-KR')===teamB.toLocaleLowerCase('ko-KR')){alert('서로 다른 클랜 이름을 입력해 주세요.');return;}
+  if(!confirm(`${title}\n${teamA} vs ${teamB}\n대항전 등록 요청을 제출할까요?`))return;
+  openTeamBattleIssue(`[대항전등록] ${title}`,`요청 종류: 대항전 등록\n대항전 이름: ${title}\n첫 번째 팀: ${teamA}\n두 번째 팀: ${teamB}\n\nSC ELO BOARD 홈페이지의 대항전 입력 화면에서 제출된 요청입니다. 개인 ELO와 무관한 대항전입니다.`);
+}
+function submitTeamBattleGame(event) {
+  event.preventDefault();
+  const battleId=$('tbBattleId').value, battle=(boardData.team_battles||[]).find(b=>String(b.id)===String(battleId));
+  const playerA=$('tbPlayerA').value.trim(), playerB=$('tbPlayerB').value.trim(), winner=$('tbWinner').value;
+  if(!battle||!playerA||!playerB){alert('대항전과 두 선수 이름을 모두 입력해 주세요.');return;}
+  if(playerA.toLocaleLowerCase('ko-KR')===playerB.toLocaleLowerCase('ko-KR')){alert('서로 다른 선수 이름을 입력해 주세요.');return;}
+  const winnerName=winner==='A'?battle.team_a:battle.team_b;
+  if(!confirm(`#${battle.id} ${battle.title}\n${battle.team_a} · ${playerA} vs ${battle.team_b} · ${playerB}\n승리 팀: ${winnerName}\n개인 경기 등록 요청을 제출할까요?`))return;
+  openTeamBattleIssue(`[대항전개인전등록] #${battle.id} ${playerA} vs ${playerB}`,`요청 종류: 대항전 개인 경기 등록\n대항전 번호: ${battle.id}\n대항전 이름: ${battle.title}\n첫 번째 팀: ${battle.team_a}\n첫 번째 팀 선수: ${playerA}\n두 번째 팀: ${battle.team_b}\n두 번째 팀 선수: ${playerB}\n승리 팀: ${winner}\n\nSC ELO BOARD 홈페이지의 대항전 입력 화면에서 제출된 요청입니다. 기존 개인 ELO/승패에는 반영하지 않습니다.`);
+}
+
 function showTeamBattles() {
   const battles=boardData.team_battles||[];
   if(!battles.length)return `<h2>🛡️ 대항전 기록</h2><p class="empty">아직 등록된 대항전이 없습니다. 디스코드에서 관리자 명령어 <b>/대항전등록</b>으로 시작해 주세요.</p>`;
@@ -364,6 +416,7 @@ function render(tab=currentTab) {
   if(tab==="ranking")content.innerHTML=showRanking(boardData.players);
   if(tab==="matches")content.innerHTML=showMatches();
   if(tab==="teammatches")content.innerHTML=showTeamBattles();
+  if(tab==="teambattleinput")content.innerHTML=showTeamBattleInput();
   if(tab==="matchregister")content.innerHTML=showMatchRegistration();
   if(tab==="players")content.innerHTML=showPlayerSearch();
   if(tab==="register")content.innerHTML=showRegistration();
@@ -383,6 +436,11 @@ function render(tab=currentTab) {
   if(tab==="matchregister"){
     const form=$("matchRegisterForm");
     if(form)form.addEventListener("submit",submitMatchRegistration);
+  }
+  if(tab==="teambattleinput"){
+    const createForm=$("teamBattleCreateForm"), gameForm=$("teamBattleGameForm");
+    if(createForm)createForm.addEventListener("submit",submitTeamBattleCreate);
+    if(gameForm)gameForm.addEventListener("submit",submitTeamBattleGame);
   }
   if(tab==="manage"){
     const form=$("manageForm"), action=$("manageAction"), fields=$("editFields"), warning=$("deleteWarning");
